@@ -363,9 +363,6 @@ polarFreq <- function(mydata,
     y2 <- rev((speed + offset) * cos(pi * angle / 180))
     lpolygon(c(x1, x2), c(y1, y2), col = colour, border = border.col, lwd = 0.5)  
     }
-    if(speed < 1) {
-      loaCircle(x=0.0, y=0.0, col = colour, radius= offset)
-    }  
   }
 
 
@@ -479,7 +476,11 @@ polarFreq <- function(mydata,
   # plot
   plt <- do.call(xyplot, xyplot.args)
 
-
+  # add central circle
+  circ_dat <- data.frame(offset = offset)
+  circ_dat$colour <- col[as.numeric(results.grid[results.grid$ws <= 1, 'div'])]
+  plt <- plt + layer(loaCircle(x = 0, y = 0, col = circ_dat$colour, radius = circ_dat$offset), data = list(circ_dat=circ_dat))
+               
   #################
   ## output
   #################
