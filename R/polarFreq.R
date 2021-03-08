@@ -364,8 +364,7 @@ polarFreq <- function(mydata,
     lpolygon(c(x1, x2), c(y1, y2), col = colour, border = border.col, lwd = 0.5)  
     }
     if(speed < 1) {
-      grid.circle(x=0.0, y=0.0, r= offset, default.units="npc", name=NULL,
-            gp=gpar(), draw=TRUE, vp=NULL)
+      loaCircle(x=0.0, y=0.0, radius= offset)
     }  
   }
 
