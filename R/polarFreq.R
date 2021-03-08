@@ -355,7 +355,7 @@ polarFreq <- function(mydata,
   poly <- function(dir, speed, colour) {
 
     ## offset by 3 * ws.int so that centre is not compressed
-    if(speed <= 1) {
+    if(speed > 1) {
     angle <- seq(dir - wd.int/2, dir + wd.int/2, length = round(wd.int))
     x1 <- (speed + offset - ws.int) * sin(pi * angle / 180)
     y1 <- (speed + offset - ws.int) * cos(pi * angle / 180)
@@ -363,7 +363,7 @@ polarFreq <- function(mydata,
     y2 <- rev((speed + offset) * cos(pi * angle / 180))
     lpolygon(c(x1, x2), c(y1, y2), col = colour, border = border.col, lwd = 0.5)  
     }
-    if(speed > 1) {
+    if(speed < 1) {
       grid.circle(x=0.0, y=0.0, r= offset, default.units="npc", name=NULL,
             gp=gpar(), draw=TRUE, vp=NULL)
     }  
