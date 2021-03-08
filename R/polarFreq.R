@@ -352,7 +352,7 @@ polarFreq <- function(mydata,
   }
 
 
-  poly <- function(dir, speed, colour) {
+  poly <- function(dir, speed, colour, offset) {
 
     ## offset by 3 * ws.int so that centre is not compressed
     if(speed > 1) {
@@ -438,7 +438,7 @@ polarFreq <- function(mydata,
       for (i in 1:nrow(subdata)) {
         colour <- col[as.numeric(subdata$div[i])]
         #   if (subdata$weights[i] == 0) colour <- "transparent"
-        poly(subdata$wd[i], subdata$ws[i], colour)
+        poly(subdata$wd[i], subdata$ws[i], colour, offset = offset)
       }
 
       ## annotate
