@@ -479,7 +479,7 @@ polarFreq <- function(mydata,
   # add central circle
   circ_dat <- data.frame(offset = offset)
   circ_dat$colour <- col[as.numeric(results.grid[results.grid$ws <= 1, 'div'])]
-  plt <- plt + layer(loaCircle(x = 0, y = 0, col = circ_dat$colour, radius = circ_dat$offset), data = list(circ_dat=circ_dat))
+  plt <- plt + lattice::layer(loaCircle(x = 0, y = 0, col = circ_dat$colour, radius = circ_dat$offset), data = list(circ_dat=circ_dat))
                
   #################
   ## output
