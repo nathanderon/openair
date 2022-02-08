@@ -251,6 +251,7 @@ polarFreq <- function(mydata,
   ## to make first interval easier to work with, set ws = 0 + e
   ids <- which(mydata$ws == 0)
   mydata$ws[ids] <- mydata$ws[ids] + 0.0001
+  mydata$wd[ids] <- 0
 
   ## remove all NAs
   mydata <- na.omit(mydata)
