@@ -200,8 +200,7 @@ polarFreq <- function(mydata,
 
 
   ## extract necessary data
-  vars <- c("wd", "ws")
-  if (any(type %in% dateTypes)) vars <- c(vars, "date")
+  vars <- c("wd", "ws", "time")
   
   ## intervals in wind direction
   wd.int <- 360/round(wd.nint)
