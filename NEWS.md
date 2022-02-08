@@ -1,9 +1,20 @@
 # openair 2.8-99
 
+# openair 2.8-6
+
+- fix annotation bug when comparing two data sets in `windRose`
+- enhance `selectRunning`. Now returns full data frame with a new condition column.
+- make sure "hemisphere" argument goes to type "monthyear" and "yearmonth"
+- argument `month` not passed in `calendarPlot`
+
+# openair 2.8-4
+
 - fix bug in `windRose` where whole period is calm
 - add optimisation to `polarCluster` to speed up clustering through option `pamonce = 3`. This should not appreciably affect results.
 - fix strange bug in `aqStats` due to `lubridate` time zone issue.
 - fix bug in `TaylorDiagram` when group was present.
+- Do not convert times with Daylight Saving Time when checking data --- just report presence.
+- add option `plot.type` to `summaryPlot` to change line style; most useful for vertical lines in time series with `plot.type = "h"`
 
 ## openair 2.8-1
 

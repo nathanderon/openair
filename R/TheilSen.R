@@ -219,8 +219,7 @@
 ##' Sciences 53, 386-392, 521-525, 1397-1412.
 ##'
 ##' \dots{} see also several of the Air Quality Expert Group (AQEG) reports for
-##'   the use of similar tests applied to UK/European air quality data, see
-##'   \url{https://uk-air.defra.gov.uk/library/aqeg/}.
+##'   the use of similar tests applied to UK/European air quality data.
 ##' @keywords methods
 ##' @examples
 ##'
@@ -527,7 +526,7 @@ TheilSen <- function(mydata, pollutant = "nox", deseason = FALSE,
   vars <- c(type, "p.stars")
 
   res2 <- group_by(split.data, UQS(syms(vars))) %>%
-    summarise_all(funs(mean(., na.rm = TRUE)))
+    summarise(across(everything(), ~ mean(.x, na.rm = TRUE)))
 
   ## calculate percentage changes in slope and uncertainties need
   ## start and end dates (in days) to work out concentrations at those

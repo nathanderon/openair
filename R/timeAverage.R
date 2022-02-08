@@ -253,7 +253,8 @@ timeAverage <- function(mydata, avg.time = "day", data.thresh = 0,
       firstLine <- data.frame(date = as.POSIXct(start.date, tz = TZ))
 
       ## add in type
-      firstLine[[type]] <- mydata[[type]][1]
+      #firstLine[[type]] <- mydata[[type]][1]
+      firstLine[type] <- mydata[1, type]
       mydata <- bind_rows(firstLine, mydata)
 
       ## for cutting data must ensure it is in GMT because combining
@@ -447,10 +448,10 @@ timeAverage <- function(mydata, avg.time = "day", data.thresh = 0,
       if (statistic == "mean") { ## faster for some reason?
         
         avmet <- group_by(mydata, UQS(syms(vars))) %>%
-          summarise_all(
-            funs(
-              if (sum(is.na(.)) / length(.) <= 1 - data.thresh) {
-                mean(., na.rm = TRUE)
+          summarise(
+            across(everything(),
+              ~ if (sum(is.na(.x)) / length(.x) <= 1 - data.thresh) {
+                mean(.x, na.rm = TRUE)
               } else {
                 NA
               }
@@ -458,10 +459,10 @@ timeAverage <- function(mydata, avg.time = "day", data.thresh = 0,
           )
       } else {
         avmet <- group_by(mydata, UQS(syms(vars))) %>%
-          summarise_all(
-            funs(
-              if (sum(is.na(.)) / length(.) <= 1 - data.thresh) {
-                FUN(.)
+          summarise(
+            across(everything(),
+              ~ if (sum(is.na(.x)) / length(.x) <= 1 - data.thresh) {
+                FUN(.x)
               } else {
                 NA
               }
@@ -481,9 +482,11 @@ timeAverage <- function(mydata, avg.time = "day", data.thresh = 0,
 
       # This is much faster for some reason
       if (statistic == "mean") {
-        avmet <- avmet %>% summarise_all(funs(mean(., na.rm = TRUE)))
+        avmet <- avmet %>% 
+          summarise(across(everything(), ~mean(.x, na.rm = TRUE)))
       } else {
-        avmet <- avmet %>% summarise_all(funs(FUN(.)))
+        avmet <- avmet %>% 
+          summarise(across(everything(), ~FUN(.x)))
       }
     }
 
